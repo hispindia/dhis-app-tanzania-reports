@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Dhis2QuIC</title>
+
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Jasny Bootstrap-Extension CSS -->
+    <link href="assets/css/jasny-bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-select.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/jasny-bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-select.js"></script>
+    <script type="text/javascript" src="assets/js/moment.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="assets/js/output.js"></script>
+
+</head>
+<body id="pageBody">
+
+<div id="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <b>  Dhis2QuIC Scorecards App   </b>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!--
+                <li><a href="import.html" class="smoothScroll">
+                    Import
+                </a></li>
+                -->
+                <li class="active"><a href="outputs.html" class="smoothScroll">
+                    Scorecard
+                </a></li>
+                <li><a href="#" onclick="location.href = homeURL " class="smoothScroll">
+                    Dashboard
+                </a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+
+    <div class="container" id="page">
+        <div class="row">
+            <div class="col-md-12"><div class="alert alert-info" role="alert">Select Facility and period :</div></div>
+            </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group" id="councilFormGroup">
+                    <label for="councilSelect">Council :</label>
+                    <br/>
+                    <select id="councilSelect" class="dropdown" data-live-search="true">
+                        <option value="">Select Council</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group" id="facilityFormGroup">
+                    <label for="facilitySelect">Facility :</label>
+                    <br/>
+                    <select id="facilitySelect" class="dropdown" data-live-search="true">
+                        <option value="">Select Facility</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class='col-md-3'>
+                    <div class="form-group" id="startYearFormGroup">
+                        <label for="startYearPicker">Select Year :</label>
+                        <br/>
+                        <div class='input-group date' id='startYearPicker'>
+                            <input type='text' class="form-control" id="startYear"/>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group" id="startQuarterSelectForm">
+                        <label for="quarterSelect">Select Quarter :</label>
+                        <br/>
+                        <select id="quarterSelect" class="dropdown" data-live-search="true">
+                            <option value="">Select Quarter</option>
+                            <option value="1">First (Jan-Mar)</option>
+                            <option value="2">Second (April-June)</option>
+                            <option value="3">Third (July-Sep)</option>
+                            <option value="4">Fourth (Oct-Dec)</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12"><br></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-3" id="genButton">
+                <button type="button" class="btn btn-primary" aria-label="Left Align">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate Scorecard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </button>
+            </div>
+            <div id="msgs" class="col-md-4"></div>
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>

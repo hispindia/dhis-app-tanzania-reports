@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Facility Scorecard QuIC">
+    <meta name="author" content="Mithilesh Kumar Thakur<mithilesh.hisp@gmail.com>">
+
+    <title>Facility Scorecard QuIC</title>
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Jasny Bootstrap-Extension CSS -->
+    <link href="assets/css/jasny-bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-select.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='assets/css/bordered.css' rel='stylesheet' type='text/css'>
+
+    <style type="text/css" media="print">
+        @page {
+            size: auto;   /* auto is the initial value */
+            margin: 5mm 5mm 5mm 5mm;   /* this affects the margin in the printer settings */
+        }
+
+        body {
+            margin: 5mm; /* this affects the margin on the content before sending to printer */
+        }
+		.print+.print {
+			page-break-before: always;
+		}
+    </style>
+
+
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/jasny-bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-select.js"></script>
+    <script type="text/javascript" src="assets/js/moment.js"></script>
+    <script type="text/javascript" src="assets/js/scorecardLogic.js"></script>
+    <script type="text/javascript" src="assets/js/utility-functions.js"></script>
+
+
+</head>
+<body id="pageBody">
+<div id="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <b> Dhis2QuIC Scorecards App  </b>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!--
+                <li><a href="import.html" class="smoothScroll">
+                    Import
+                </a></li>
+                -->
+                <li class="active"><a href="outputs.html" class="smoothScroll">
+                    Scorecard
+                </a></li>
+                <li><a id="scoreCardDashBoardURL" href=""  onclick="goToDashBoardFromScoreCard();" class="smoothScroll">
+                    Dashboard
+                </a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+<div class="btn btn-primary" onclick="window.history.go(-1)">Back</div><label><span class="btn btn-success" onclick="printPage()" id="btnPrint">Print</span></label>
+<div class="container" id="page">
+<div class="container">
+<div class="col-md-12" id="tableContainer">
+<div id="printArea">
+<table class="bordered" id="scorecardHead">
+    <tr>
+        <td rowspan="2" width="250px">
+            <div style="text-align: center">
+                <div style="color: #0000FF">QuIC</div>
+                <div style="color: #E25D13">Facility Scorecard</div>
+            </div>
+        </td>
+        <th width="200px">Name</th>
+        <th width="200px">DC</th>
+        <th width="200px">Level</th>
+        <th width="200px">Type</th>
+        <th width="100px">yy</th>
+        <th width="100px">Quarter</th>
+    </tr>
+    <tr>
+        <td id="orgName" style="text-align: center"></td>
+        <td id="orgDC" style="text-align: center"></td>
+        <td id="facilityLevel" style="text-align: center"></td>
+        <td id="facilityType" style="text-align: center"></td>
+        <td id="yy" style="text-align: center"></td>
+        <td id="selectedQuarter" style="text-align: center"></td>
+    </tr>
+</table>
+<!--
+<table class="bordered" id="table01">
+    <tr>
+        <th colspan="2" rowspan="3" style="text-align: center">Able to provide</th>
+        <th colspan="7" style="text-align: center">Reasons for not providing</th>
+    </tr>
+    <tr>
+        <th style="text-align: center">Staffing</th>
+        <th width="100" style="text-align: center">Drugs</th>
+        <th width="100" style="text-align: center">Equipment &amp; supplies</th>
+        <th width="100" style="text-align: center">Electricity</th>
+        <th style="text-align: center">Facility management</th>
+        <th style="text-align: center">National policy</th>
+        <th width="100" style="text-align: center">Laboratory</th>
+    </tr>
+    <tr>
+        <td style="text-align: center"><img src="assets/img/staffing.png" width="45px" height="45px"></td>
+        <td width="100" style="text-align: center"><img src="assets/img/drugs.png" width="45px" height="45px"/></td>
+        <td width="100" style="text-align: center"><img src="assets/img/equipment.png" width="45px" height="45px"/></td>
+        <td width="100" style="text-align: center"><img src="assets/img/electricity.png" width="45px" height="45px"/></td>
+        <td style="text-align: center"><img src="assets/img/facility.png" width="45px" height="45px"/></td>
+        <td style="text-align: center"><img src="assets/img/policy.png" width="45px" height="45px"/></td>
+        <td width="100" style="text-align: center"><img src="assets/img/laboratory.png" width="45px" height="45px"/></td>
+    </tr>
+    <tr>
+        <td colspan="2">Normal Delivery</td>
+
+        <td id="SF1_1" width="100" style="text-align: center"></td>
+        <td id="SF1_2" width="100" style="text-align: center"></td>
+        <td id="SF1_3" width="100" style="text-align: center"></td>
+        <td id="SF1_4" width="100" style="text-align: center"></td>
+        <td id="SF1_5" width="100" style="text-align: center"></td>
+        <td id="SF1_6" width="100" style="text-align: center"></td>
+        <td id="SF1_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Utero-tonic drugs</td>
+
+        <td id="SF2_1" width="100" style="text-align: center"></td>
+        <td id="SF2_2" width="100" style="text-align: center"></td>
+        <td id="SF2_3" width="100" style="text-align: center"></td>
+        <td id="SF2_4" width="100" style="text-align: center"></td>
+        <td id="SF2_5" width="100" style="text-align: center"></td>
+        <td id="SF2_6" width="100" style="text-align: center"></td>
+        <td id="SF2_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Anti-convulsants</td>
+
+        <td id="SF3_1" width="100" style="text-align: center"></td>
+        <td id="SF3_2" width="100" style="text-align: center"></td>
+        <td id="SF3_3" width="100" style="text-align: center"></td>
+        <td id="SF3_4" width="100" style="text-align: center"></td>
+        <td id="SF3_5" width="100" style="text-align: center"></td>
+        <td id="SF3_6" width="100" style="text-align: center"></td>
+        <td id="SF3_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Corticosteroids in preterm labour</td>
+
+        <td id="SF4_1" width="100" style="text-align: center"></td>
+        <td id="SF4_2" width="100" style="text-align: center"></td>
+        <td id="SF4_3" width="100" style="text-align: center"></td>
+        <td id="SF4_4" width="100" style="text-align: center"></td>
+        <td id="SF4_5" width="100" style="text-align: center"></td>
+        <td id="SF4_6" width="100" style="text-align: center"></td>
+        <td id="SF4_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Parenteral antibiotics – mother</td>
+
+        <td id="SF5_1" width="100" style="text-align: center"></td>
+        <td id="SF5_2" width="100" style="text-align: center"></td>
+        <td id="SF5_3" width="100" style="text-align: center"></td>
+        <td id="SF5_4" width="100" style="text-align: center"></td>
+        <td id="SF5_5" width="100" style="text-align: center"></td>
+        <td id="SF5_6" width="100" style="text-align: center"></td>
+        <td id="SF5_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Parenteral antibiotics - newborn</td>
+
+        <td id="SF6_1" width="100" style="text-align: center"></td>
+        <td id="SF6_2" width="100" style="text-align: center"></td>
+        <td id="SF6_3" width="100" style="text-align: center"></td>
+        <td id="SF6_4" width="100" style="text-align: center"></td>
+        <td id="SF6_5" width="100" style="text-align: center"></td>
+        <td id="SF6_6" width="100" style="text-align: center"></td>
+        <td id="SF6_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">IV fluids to newborn</td>
+
+        <td id="SF7_1" width="100" style="text-align: center"></td>
+        <td id="SF7_2" width="100" style="text-align: center"></td>
+        <td id="SF7_3" width="100" style="text-align: center"></td>
+        <td id="SF7_4" width="100" style="text-align: center"></td>
+        <td id="SF7_5" width="100" style="text-align: center"></td>
+        <td id="SF7_6" width="100" style="text-align: center"></td>
+        <td id="SF7_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Manual removal of placenta</td>
+
+        <td id="SF8_1" width="100" style="text-align: center"></td>
+        <td id="SF8_2" width="100" style="text-align: center"></td>
+        <td id="SF8_3" width="100" style="text-align: center"></td>
+        <td id="SF8_4" width="100" style="text-align: center"></td>
+        <td id="SF8_5" width="100" style="text-align: center"></td>
+        <td id="SF8_6" width="100" style="text-align: center"></td>
+        <td id="SF8_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Removal of retained products – D&amp;C</td>
+
+        <td id="SF9_1" width="100" style="text-align: center"></td>
+        <td id="SF9_2" width="100" style="text-align: center"></td>
+        <td id="SF9_3" width="100" style="text-align: center"></td>
+        <td id="SF9_4" width="100" style="text-align: center"></td>
+        <td id="SF9_5" width="100" style="text-align: center"></td>
+        <td id="SF9_6" width="100" style="text-align: center"></td>
+        <td id="SF9_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Removal of retained products – MVA</td>
+
+        <td id="SF10_1" width="100" style="text-align: center"></td>
+        <td id="SF10_2" width="100" style="text-align: center"></td>
+        <td id="SF10_3" width="100" style="text-align: center"></td>
+        <td id="SF10_4" width="100" style="text-align: center"></td>
+        <td id="SF10_5" width="100" style="text-align: center"></td>
+        <td id="SF10_6" width="100" style="text-align: center"></td>
+        <td id="SF10_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Newborn resuscitation</td>
+
+        <td id="SF11_1" width="100" style="text-align: center"></td>
+        <td id="SF11_2" width="100" style="text-align: center"></td>
+        <td id="SF11_3" width="100" style="text-align: center"></td>
+        <td id="SF11_4" width="100" style="text-align: center"></td>
+        <td id="SF11_5" width="100" style="text-align: center"></td>
+        <td id="SF11_6" width="100" style="text-align: center"></td>
+        <td id="SF11_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Assisted vaginal delivery</td>
+
+        <td id="SF12_1" width="100" style="text-align: center"></td>
+        <td id="SF12_2" width="100" style="text-align: center"></td>
+        <td id="SF12_3" width="100" style="text-align: center"></td>
+        <td id="SF12_4" width="100" style="text-align: center"></td>
+        <td id="SF12_5" width="100" style="text-align: center"></td>
+        <td id="SF12_6" width="100" style="text-align: center"></td>
+        <td id="SF12_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Caesarean section</td>
+
+        <td id="SF13_1" width="100" style="text-align: center"></td>
+        <td id="SF13_2" width="100" style="text-align: center"></td>
+        <td id="SF13_3" width="100" style="text-align: center"></td>
+        <td id="SF13_4" width="100" style="text-align: center"></td>
+        <td id="SF13_5" width="100" style="text-align: center"></td>
+        <td id="SF13_6" width="100" style="text-align: center"></td>
+        <td id="SF13_7" width="100" style="text-align: center"></td>
+    </tr>
+    <tr>
+        <td colspan="2">Blood transfusion</td>
+
+        <td id="SF14_1" width="100" style="text-align: center"></td>
+        <td id="SF14_2" width="100" style="text-align: center"></td>
+        <td id="SF14_3" width="100" style="text-align: center"></td>
+        <td id="SF14_4" width="100" style="text-align: center"></td>
+        <td id="SF14_5" width="100" style="text-align: center"></td>
+        <td id="SF14_6" width="100" style="text-align: center"></td>
+        <td id="SF14_7" width="100" style="text-align: center"></td>
+    </tr>
+</table>
+<br>
+<!--<div style="page-break-before: always">-->
+    <table class="bordered" id="table02">
+        <tr>
+            <th colspan="3">ADMITTANCE & REFERRAL</th>
+        </tr>
+        <tr>
+            <td style="text-align: center">Labour ward open at all times</td>
+            <td style="text-align: center">All women who needed admitting were admitted</td>
+            <td style="text-align: center">All treated without need to refer</td>
+
+        </tr>
+        <tr>
+            <td id="A1" style="text-align: center"></td>
+            <td id="A2" style="text-align: center"></td>
+            <td id="A3" style="text-align: center"></td>
+
+        </tr>
+    </table>
+    <br>
+    <table class="bordered" id="table03">
+        <tr>
+            <th colspan="2" style="text-align:center">BLOOD</th>
+            <th colspan="4" style="text-align:center">INFRASTRUCTURE</th>
+        </tr>
+        <tr>
+            <td style="text-align:center">Refrigerator for blood storage with 24/7 power</td>
+            <td style="text-align:center">Blood available</td>
+            <td style="text-align:center">Adequate beds/mattresses</td>
+            <td style="text-align:center">Accessible &amp;functional toilet for women in labour</td>
+            <td style="text-align:center">Sink in delivery room with running water</td>
+            <td style="text-align:center">Power 24/7 in delivery room</td>
+        </tr>
+        <tr>
+            <td style="text-align:center" id="A31"></td>
+            <td style="text-align:center" id="A32"></td>
+            <td style="text-align:center" id="A33"></td>
+            <td style="text-align:center" id="A34"></td>
+            <td style="text-align:center" id="A35"></td>
+            <td style="text-align:center" id="A36"></td>
+        </tr>
+    </table>
+    <br>
+    <table class="bordered" id="table04">
+        <tr>
+            <th colspan="9" style="text-align:center">EQUIPMENT &amp; SUPPLIES: available, functioning and in enough
+                quantity
+            </th>
+        </tr>
+        <tr>
+            <td style="text-align:center">Syringes and needles</td>
+            <td style="text-align:center">IV cannulas (assorted)</td>
+            <td style="text-align:center">Elbow gloves/modified gloves<br/></td>
+            <td style="text-align:center">Complete delivery kit/ set</td>
+            <td style="text-align:center">MVA kit</td>
+            <td style="text-align:center">D&amp;C kit</td>
+            <td style="text-align:center">Manual vacuum extractor</td>
+            <td style="text-align:center">Ambu bag</td>
+            <td style="text-align:center">Butterfly needles</td>
+        </tr>
+        <tr>
+            <td style="text-align:center" id="A22"></td>
+            <td style="text-align:center" id="A23"></td>
+            <td style="text-align:center" id="A24"></td>
+            <td style="text-align:center" id="A25"></td>
+            <td style="text-align:center" id="A26"></td>
+            <td style="text-align:center" id="A27"></td>
+            <td style="text-align:center" id="A28"></td>
+            <td style="text-align:center" id="A29"></td>
+            <td style="text-align:center" id="A30"></td>
+        </tr>
+    </table>
+    <br>
+    <table class="bordered" id="table05">
+        <tr>
+            <th colspan="8" style="text-align:center">DRUGS: in stock and within expiry date</th>
+        </tr>
+        <tr>
+            <td style="text-align:center">Parenteral oxytocin</td>
+            <td style="text-align:center">Magnesium sulphate</td>
+            <td style="text-align:center">Injectable ampiclox<br/></td>
+            <td style="text-align:center">IM/IV gentamycin</td>
+            <td style="text-align:center">Cephalosporine</td>
+            <td style="text-align:center">Metronidazole</td>
+            <td style="text-align:center">Spinal anaesthesia</td>
+            <td style="text-align:center">General anaesthesia</td>
+        </tr>
+        <tr>
+            <td style="text-align:center" id="A13"></td>
+            <td style="text-align:center" id="A14"></td>
+            <td style="text-align:center" id="A15"></td>
+            <td style="text-align:center" id="A17"></td>
+            <td style="text-align:center" id="A18"></td>
+            <td style="text-align:center" id="A19"></td>
+            <td style="text-align:center" id="A20"></td>
+            <td style="text-align:center" id="A21"></td>
+        </tr>
+    </table>
+    <br>
+    <table class="bordered" id="table06">
+        <tr>
+            <th colspan="8" style="text-align:center">STAFFING: trained and available for</th>
+        </tr>
+        <tr>
+            <td style="text-align:center">Normal delivery</td>
+            <td style="text-align:center">Assisted vaginal delivery</td>
+            <td style="text-align:center">Manual removal of placenta<br/></td>
+            <td style="text-align:center">Manual vacuum aspiration</td>
+            <td style="text-align:center">Newborn resuscitation</td>
+            <td style="text-align:center">Caesarean section</td>
+            <td style="text-align:center">Anaesthesia</td>
+            <td style="text-align:center">Laboratory technician</td>
+
+        </tr>
+        <tr>
+            <td style="text-align:center" id="A4"></td>
+            <td style="text-align:center" id="A5"></td>
+            <td style="text-align:center" id="A6"></td>
+            <td style="text-align:center" id="A7"></td>
+            <td style="text-align:center" id="A8"></td>
+            <td style="text-align:center" id="A9"></td>
+            <td style="text-align:center" id="A10"></td>
+            <td style="text-align:center" id="A11"></td>
+
+        </tr>
+    </table>
+
+<!--</div>-->
+    <p align="middle">
+        For more details, please contact:  <a href="mailto:QUIC.Tanzania@options.co.uk">QUIC.Tanzania@options.co.uk</a>
+    </p>
+
+</div>
+</div><!--
+<div class="col-md-12">
+    <div style="float: left"><label><span class="btn btn-default" id="btnPrint">Print</span></label></div>
+</div>-->
+
+</div>
+</div>
+</body>
+</html>

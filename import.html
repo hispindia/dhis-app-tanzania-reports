@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Dhis2QuIC</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-datepicker3.css" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/underscore.js"></script>
+    <script type="text/javascript" src="assets/js/moment.js"></script>
+    <script type="text/javascript" src="assets/js/import.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-datepicker.js"></script>
+
+</head>
+
+<body id="pageBody">
+
+<!-- Fixed navbar -->
+<div id="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <b>  Dhis2QuIC Scorecards App   </b>
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!--
+                <li class="active"><a href="import.html" class="smoothScroll">
+                    Import
+                </a></li>
+                -->
+                <li><a href="outputs.html" class="smoothScroll">
+                    Scorecard
+                </a></li>
+                <li><a onclick="location.href = homeURL " class="smoothScroll">
+                    Dashboard
+                </a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+
+
+<div class="container" id="page">
+
+    <div class="row" id="welcomeDiv" style="display: block">
+        <div class="alert alert-info fade in" role="alert">
+            <button class="close" data-dismiss="alert" type="button"></button>
+            <strong>Welcome to Dhis2QuIC integration application </strong>
+        </div>
+    </div>
+
+    <div class="row" id="importDiv" style="display: block">
+        <div class="col-md-2">
+            <div class="input-group date">
+                <input style="font-weight: bold" type="text" id="startDate" placeholder="Start date" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group date">
+                <input style="font-weight: bold" type="text" id="endDate" placeholder="End date" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button type="button" id="btn-import" class="btn btn-default" aria-label="Left Align">Import Data</button>
+        </div>
+        <div  class="col-md-4"></div>
+    </div>
+
+    <div class="row" id="selectPeriodAlert" style="display: none; margin-top: 20px">
+        <div class="alert alert-dismissable alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Please select the start and end dates.</strong>
+        </div>
+    </div>
+
+    <div class="row" id="selectEndDateAlert" style="display:none;margin-top:20px">
+        <div class="alert alert-dismissable alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>You can not select future date.</strong>
+        </div>
+    </div>
+
+    <div class="row" id="getFormAlertDiv" style="display: none; margin-top: 20px">
+        <div class="alert alert-warning fade in" role="alert">
+            <button class="close" data-dismiss="alert" type="button"></button>
+            <strong>Fetching commcare forms, please wait.</strong>
+        </div>
+    </div>
+
+    <div class="row" id="waitAlertDiv" style="display: none; margin-top: 20px">
+        <div class="alert alert-info fade in" role="alert">
+            <button class="close" data-dismiss="alert" type="button"></button>
+            <strong>Done downloading forms. Checking for org. unit updates, this might take a while.</strong>
+        </div>
+    </div>
+
+    <div class="row" id="alertDiv" style="display: none">
+        <div class="alert alert-info fade in" role="alert">
+            <button class="close" data-dismiss="alert" type="button"></button>
+            <strong  id="alertContent"></strong>
+        </div>
+    </div>
+
+    <div class="row" id="importAlertDiv" style="display: none">
+        <div class="alert alert-success fade in" role="alert" >
+            <button class="close" data-dismiss="alert" type="button"></button>
+            <strong id="importAlertContent"></strong>
+        </div>
+    </div>
+
+ </div>
+
+</body>
+</html>
